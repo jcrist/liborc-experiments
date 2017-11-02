@@ -21,6 +21,15 @@ ExternalProject_Add (orc_ep
 add_library (liborc STATIC IMPORTED)
 set_target_properties (liborc PROPERTIES IMPORTED_LOCATION "${ORC_PREFIX}/lib/liborc.a")
 add_dependencies (liborc orc_ep)
+include_directories (SYSTEM "${ORC_PREFIX}/include")
+# All the built libs needed to link with to use liborc
+set (LIBORC_LIBS
+     liborc
+     "${ORC_PREFIX}/lib/liblz4.a"
+     "${ORC_PREFIX}/lib/libprotobuf.a"
+     "${ORC_PREFIX}/lib/libsnappy.a"
+     "${ORC_PREFIX}/lib/libz.a")
+
 
 # -- Compiler Flags --
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
